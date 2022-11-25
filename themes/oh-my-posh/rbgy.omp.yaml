@@ -83,6 +83,9 @@ blocks:
   type: prompt
   newline: true
   segments:
+  - type: root
+    style: plain
+    template: 👑
   - type: text
     style: plain
     foreground: p:yellow
