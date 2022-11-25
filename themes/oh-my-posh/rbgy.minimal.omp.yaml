@@ -1,0 +1,87 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json
+console_title_template: "{{.Folder}}{{if .Root}} :: root{{end}} :: {{.Shell}}"
+blocks:
+- alignment: left
+  type: prompt
+  segments:
+  - type: text
+    style: plain
+    foreground: p:white
+    template: "{{ if .Segments.session.SSHSession }}\uf817{{end}} "
+  - type: session
+    style: plain
+    foreground: p:black
+    background: p:yellow
+    template: "<b>{{ .UserName }}</b><p:gray>@{{ .HostName }}</>"
+  - type: path
+    style: plain
+    foreground: p:white
+    background: transparent
+    template: " {{ .Path }} "
+    properties:
+      home_icon: 🏠
+      folder_icon: ..📂..
+      style: agnoster_short
+      max_depth: 2
+  - type: git
+    style: plain
+    foreground: p:cyan
+    background: transparent
+    template: "⟨{{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }}<p:red> 📝 {{ .Working.String }}</>{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }}{{ end }}{{ if .Staging.Changed }}<p:green> 🗄  {{ .Staging.String }}</>{{ end }}⟩"
+    properties:
+      fetch_status: true
+      fetch_upstream_icon: false
+      branch_icon: "💠 "
+      branch_ahead_icon: "⤴ "
+      branch_behind_icon: "⤵ "
+      branch_gone_icon: ✖
+      branch_identical_icon: ✔
+- type: prompt
+  alignment: right
+  segments:
+  - type: dotnet
+    style: plain
+    foreground: p:magenta
+    background: transparent
+    template: " ·NET {{ .Full }} "
+  - type: executiontime
+    style: plain
+    foreground: p:green
+    background: p:darkBlue
+    template: " ⌛ {{ .FormattedMs }} "
+    properties:
+      always_enabled: true
+      style: austin
+  - type: time
+    style: plain
+    foreground: p:cyan
+    background: transparent
+    template: " ⏰ {{ .CurrentDate | date .Format }} "
+    properties:
+      time_format: "15:04:05"
+- type: rprompt
+  segments:
+    - type: project
+      style: plain
+      foreground: p:gray
+      template: " {{ if .Error }}{{ .Error }}{{ else }}{{ if .Version }}\uf487 {{.Version}}{{ end }} {{ if .Name }}{{ .Name }}{{ end }}{{ end }} "
+- alignment: left
+  type: prompt
+  newline: true
+  segments:
+  - type: text
+    style: plain
+    foreground: p:yellow
+    template: "<p:blue>></><p:red>></><p:green>></>>"
+palette: 
+  black: "black"
+  gray: "darkGray"
+  red: "lightRed"
+  green: "lightGreen"
+  yellow: "lightYellow"
+  blue: "lightBlue"
+  white: "white"
+  cyan: "cyan"
+  magenta: "magenta"
+final_space: true
+version: 2

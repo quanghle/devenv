@@ -1,0 +1,103 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json
+console_title_template: "{{.Folder}}{{if .Root}} :: root{{end}} :: {{.Shell}}"
+blocks:
+- alignment: left
+  type: prompt
+  segments:
+  - type: os
+    style: plain
+    foreground: p:white
+    template: "{{.Icon}}{{ if .Segments.session.SSHSession }} \uf817{{end}} "
+  - type: session
+    style: diamond
+    leading_diamond: "\ue0b6"
+    trailing_diamond: "\ue0b4"
+    foreground: p:black
+    background: p:yellow
+    template: "<b>{{ .UserName }}</b><p:gray>@{{ .HostName }}</>"
+  - type: path
+    style: diamond
+    leading_diamond: "\ue0b6"
+    trailing_diamond: "\ue0b4"
+    foreground: p:white
+    background: transparent
+    template: " {{ .Path }} "
+    properties:
+      home_icon: 🏠
+      folder_icon: ..📂..
+      style: agnoster_short
+      max_depth: 2
+  - type: git
+    style: diamond
+    leading_diamond: "\ue0b6"
+    trailing_diamond: "\ue0b4"
+    foreground: p:lightPurple
+    background: p:darkPurple
+    template: "{{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }}<p:red> \uf044 {{ .Working.String }}</>{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}<p:green> \uf046 {{ .Staging.String }}</>{{ end }}"
+    properties:
+      fetch_status: true
+      fetch_stash_count: true
+      fetch_worktree_count: true
+      fetch_upstream_icon: true
+      fetch_bare_info: true
+      branch_icon: "\ue725 "
+      branch_ahead_icon: "⤴ "
+      branch_behind_icon: "⤵ "
+      branch_gone_icon: ✖
+      branch_identical_icon: ✔
+- type: prompt
+  alignment: right
+  segments:
+  - type: dotnet
+    style: powerline
+    powerline_symbol: "\ue0c7"
+    invert_powerline: true
+    foreground: p:white
+    background: "#4d2dcc"
+    template: " \uE77F {{ .Full }} "
+  - type: executiontime
+    style: accordion
+    powerline_symbol: "\ue0c7"
+    invert_powerline: true
+    foreground: p:green
+    background: p:darkBlue
+    template: " ⌛ {{ .FormattedMs }} "
+    properties:
+      always_enabled: true
+      style: austin
+  - type: time
+    style: accordion
+    powerline_symbol: "\ue0c6"
+    foreground: p:lightPurple
+    background: p:orange
+    template: " ⏰ {{ .CurrentDate | date .Format }} "
+    properties:
+      time_format: "15:04:05"
+- type: rprompt
+  segments:
+    - type: project
+      style: plain
+      foreground: p:gray
+      template: " {{ if .Error }}{{ .Error }}{{ else }}{{ if .Version }}\uf487 {{.Version}}{{ end }} {{ if .Name }}{{ .Name }}{{ end }}{{ end }} "
+- alignment: left
+  type: prompt
+  newline: true
+  segments:
+  - type: text
+    style: plain
+    foreground: p:yellow
+    template: "<p:blue>\uf105</><p:red>\uf105</><p:green>\uf105</>\uf105"
+palette: 
+  black: "#36454F"
+  gray: "#A9A9A9"
+  red: "#E0115F"
+  green: "#7CFC00"
+  yellow: "#FAFA33"
+  blue: "#0000ff"
+  darkBlue: "#0b2c52"
+  white: "#E5E4E2"
+  orange: "#E35335"
+  lightPurple: "#C3B1E1"
+  darkPurple: "#24014d"
+final_space: true
+version: 2
