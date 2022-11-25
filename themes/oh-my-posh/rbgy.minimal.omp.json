@@ -1,0 +1,125 @@
+{
+    "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+    "version": 2,
+    "final_space": true,
+    "console_title_template": "{{.Folder}}{{if .Root}} :: root{{end}} :: {{.Shell}}",
+    "blocks": [
+      {
+        "type": "prompt",
+        "alignment": "left",
+        "segments": [
+          {
+            "type": "text",
+            "style": "plain",
+            "foreground": "p:white",
+            "template": "{{ if .Segments.session.SSHSession }}\uf817{{end}} "
+          },
+          {
+            "type": "session",
+            "style": "plain",
+            "foreground": "p:black",
+            "background": "p:yellow",
+            "template": "<b>{{ .UserName }}</b><p:gray>@{{ .HostName }}</>"
+          },
+          {
+            "type": "path",
+            "style": "plain",
+            "foreground": "p:white",
+            "background": "transparent",
+            "template": " {{ .Path }} ",
+            "properties": {
+              "folder_icon": "..📂..",
+              "home_icon": "🏠",
+              "max_depth": 2,
+              "style": "agnoster_short"
+            }
+          },
+          {
+            "type": "git",
+            "style": "plain",
+            "foreground": "p:cyan",
+            "background": "transparent",
+            "template": "\u27e8{{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }}<p:red> 📝 {{ .Working.String }}</>{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }}{{ end }}{{ if .Staging.Changed }}<p:green> 🗄  {{ .Staging.String }}</>{{ end }}\u27e9",
+            "properties": {
+              "branch_ahead_icon": "\u2934 ",
+              "branch_behind_icon": "\u2935 ",
+              "branch_gone_icon": "\u2716",
+              "branch_icon": "💠 ",
+              "branch_identical_icon": "\u2714",
+              "fetch_status": true,
+              "fetch_upstream_icon": false
+            }
+          }
+        ]
+      },
+      {
+        "type": "prompt",
+        "alignment": "right",
+        "segments": [
+          {
+            "type": "dotnet",
+            "style": "plain",
+            "foreground": "p:magenta",
+            "background": "transparent",
+            "template": " ·NET {{ .Full }} "
+          },
+          {
+            "type": "executiontime",
+            "style": "plain",
+            "foreground": "p:green",
+            "background": "p:darkBlue",
+            "template": " \u231b {{ .FormattedMs }} ",
+            "properties": {
+              "always_enabled": true,
+              "style": "austin"
+            }
+          },
+          {
+            "type": "time",
+            "style": "plain",
+            "foreground": "p:cyan",
+            "background": "transparent",
+            "template": " \u23f0 {{ .CurrentDate | date .Format }} ",
+            "properties": {
+              "time_format": "15:04:05"
+            }
+          }
+        ]
+      },
+      {
+        "type": "rprompt",
+        "segments": [
+          {
+            "type": "project",
+            "style": "plain",
+            "foreground": "p:gray",
+            "template": " {{ if .Error }}{{ .Error }}{{ else }}{{ if .Version }}\uf487 {{.Version}}{{ end }} {{ if .Name }}{{ .Name }}{{ end }}{{ end }} "
+          }
+        ]
+      },
+      {
+        "type": "prompt",
+        "alignment": "left",
+        "segments": [
+          {
+            "type": "text",
+            "style": "plain",
+            "foreground": "p:yellow",
+            "template": "<p:blue>></><p:red>></><p:green>></>>"
+          }
+        ],
+        "newline": true
+      }
+    ],
+    "palette": {
+      "black": "black",
+      "blue": "lightBlue",
+      "cyan": "cyan",
+      "gray": "darkGray",
+      "green": "lightGreen",
+      "magenta": "magenta",
+      "red": "lightRed",
+      "white": "white",
+      "yellow": "lightYellow"
+    }
+  }
