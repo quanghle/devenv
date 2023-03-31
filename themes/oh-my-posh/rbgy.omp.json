@@ -12,15 +12,15 @@
           "type": "os",
           "style": "plain",
           "foreground": "p:white",
-          "template": "{{.Icon}}{{ if .Segments.session.SSHSession }} \uf817{{end}} "
+          "template": "{{.Icon}}{{ if .Segments.session.SSHSession }} 󰌘 {{end}} "
         },
         {
           "type": "session",
           "style": "diamond",
           "foreground": "p:black",
           "background": "p:yellow",
-          "leading_diamond": "\ue0b6",
-          "trailing_diamond": "\ue0b4",
+          "leading_diamond": "",
+          "trailing_diamond": "",
           "template": "<b>{{ .UserName }}</b><p:gray>@{{ .HostName }}</>"
         },
         {
@@ -28,14 +28,18 @@
           "style": "diamond",
           "foreground": "p:white",
           "background": "transparent",
-          "leading_diamond": "\ue0b6",
-          "trailing_diamond": "\ue0b4",
+          "leading_diamond": "",
+          "trailing_diamond": "",
           "template": " {{ .Path }} ",
           "properties": {
             "folder_icon": "..📂..",
             "home_icon": "🏠",
             "max_depth": 2,
-            "style": "agnoster_short"
+            "style": "agnoster_short",
+            "mapped_locations": {
+              "/": "🖥️ ",
+              "/Volumes": "󰲁 "
+            }
           }
         },
         {
@@ -43,15 +47,15 @@
           "style": "diamond",
           "foreground": "p:lightPurple",
           "background": "p:darkPurple",
-          "leading_diamond": "\ue0b6",
-          "trailing_diamond": "\ue0b4",
-          "template": "{{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }}<p:red> \uf044 {{ .Working.String }}</>{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}<p:green> \uf046 {{ .Staging.String }}</>{{ end }}",
+          "leading_diamond": "",
+          "trailing_diamond": "",
+          "template": "{{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }}<p:red>  {{ .Working.String }}</>{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}<p:green>  {{ .Staging.String }}</>{{ end }}",
           "properties": {
-            "branch_ahead_icon": "\u2934 ",
-            "branch_behind_icon": "\u2935 ",
-            "branch_gone_icon": "\u2716",
-            "branch_icon": "\ue725 ",
-            "branch_identical_icon": "\u2714",
+            "branch_ahead_icon": "⤴ ",
+            "branch_behind_icon": "⤵ ",
+            "branch_gone_icon": "✖",
+            "branch_icon": "󰘬 ",
+            "branch_identical_icon": "✔",
             "fetch_bare_info": true,
             "fetch_stash_count": true,
             "fetch_status": true,
@@ -68,20 +72,38 @@
         {
           "type": "dotnet",
           "style": "powerline",
-          "powerline_symbol": "\ue0c7",
+          "powerline_symbol": "",
           "invert_powerline": true,
           "foreground": "p:white",
           "background": "#4d2dcc",
-          "template": " \ue77f {{ .Full }} "
+          "template": "  {{ .Full }} "
+        },
+        {
+          "type": "node",
+          "style": "powerline",
+          "powerline_symbol": "",
+          "invert_powerline": true,
+          "foreground": "p:white",
+          "background": "#026e00",
+          "template": "  {{ .Full }} "
+        },
+        {
+          "type": "npm",
+          "style": "powerline",
+          "powerline_symbol": "",
+          "invert_powerline": true,
+          "foreground": "p:white",
+          "background": "#cc3534",
+          "template": "  {{ .Full }} "
         },
         {
           "type": "executiontime",
           "style": "accordion",
-          "powerline_symbol": "\ue0c7",
+          "powerline_symbol": "",
           "invert_powerline": true,
           "foreground": "p:green",
           "background": "p:darkBlue",
-          "template": " \u231b {{ .FormattedMs }} ",
+          "template": " ⌛ {{ .FormattedMs }} ",
           "properties": {
             "always_enabled": true,
             "style": "austin"
@@ -90,10 +112,10 @@
         {
           "type": "time",
           "style": "accordion",
-          "powerline_symbol": "\ue0c6",
+          "powerline_symbol": "",
           "foreground": "p:lightPurple",
           "background": "p:orange",
-          "template": " \u23f0 {{ .CurrentDate | date .Format }} ",
+          "template": " ⏰ {{ .CurrentDate | date .Format }} ",
           "properties": {
             "time_format": "15:04:05"
           }
@@ -104,10 +126,19 @@
       "type": "rprompt",
       "segments": [
         {
+          "type": "exit",
+          "style": "plain",
+          "foreground": "p:red",
+          "template": "🔴{{ .Meaning }}",
+          "properties": {
+            "always_enabled": false
+          }
+        },
+        {
           "type": "project",
           "style": "plain",
           "foreground": "p:gray",
-          "template": " {{ if .Error }}{{ .Error }}{{ else }}{{ if .Version }}\uf487 {{.Version}}{{ end }} {{ if .Name }}{{ .Name }}{{ end }}{{ end }} "
+          "template": " {{ if .Error }}{{ .Error }}{{ else }}{{ if .Version }}📦{{.Version}}{{ end }} {{ if .Name }}{{ .Name }}{{ end }}{{ end }}"
         }
       ]
     },
