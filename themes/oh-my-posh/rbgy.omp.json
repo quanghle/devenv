@@ -88,15 +88,6 @@
           "template": "  {{ .Full }} "
         },
         {
-          "type": "npm",
-          "style": "powerline",
-          "powerline_symbol": "",
-          "invert_powerline": true,
-          "foreground": "p:white",
-          "background": "#cc3534",
-          "template": "  {{ .Full }} "
-        },
-        {
           "type": "executiontime",
           "style": "accordion",
           "powerline_symbol": "",
